@@ -3,9 +3,48 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Services", "01-Services", "{457EC44A-7BBE-43DC-90D8-CC90334FD829}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Infra", "02-Infra", "{43CD13B4-4C21-49C4-AEE6-7C8C6C7A3FD7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.02-CrossCutting", "02.02-CrossCutting", "{A6DE9606-8C46-4EEA-AFCC-A139D215C80C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SagaExampleMassTransit.Infra.CrossCutting.Contracts", "src\SagaExampleMassTransit.Infra.CrossCutting.Contracts\SagaExampleMassTransit.Infra.CrossCutting.Contracts.csproj", "{CF6597AD-200F-41B2-8C1A-93083ED7C782}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.01-Data", "02.01-Data", "{AF9843E8-0EF1-4FBC-90AD-375172BC829B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SagaExampleMassTransit.Infra.Data", "src\SagaExampleMassTransit.Infra.Data\SagaExampleMassTransit.Infra.Data.csproj", "{BF14497E-B2D2-49BD-80DC-71201FE94D4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SagaExampleMassTransit.Services.Worker", "src\SagaExampleMassTransit.Services.Worker\SagaExampleMassTransit.Services.Worker.csproj", "{ED00F22F-A1DF-4620-9988-9FFEA2AECFAC}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF6597AD-200F-41B2-8C1A-93083ED7C782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF6597AD-200F-41B2-8C1A-93083ED7C782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF6597AD-200F-41B2-8C1A-93083ED7C782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF6597AD-200F-41B2-8C1A-93083ED7C782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF14497E-B2D2-49BD-80DC-71201FE94D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF14497E-B2D2-49BD-80DC-71201FE94D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF14497E-B2D2-49BD-80DC-71201FE94D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF14497E-B2D2-49BD-80DC-71201FE94D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED00F22F-A1DF-4620-9988-9FFEA2AECFAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED00F22F-A1DF-4620-9988-9FFEA2AECFAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED00F22F-A1DF-4620-9988-9FFEA2AECFAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED00F22F-A1DF-4620-9988-9FFEA2AECFAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A6DE9606-8C46-4EEA-AFCC-A139D215C80C} = {43CD13B4-4C21-49C4-AEE6-7C8C6C7A3FD7}
+		{CF6597AD-200F-41B2-8C1A-93083ED7C782} = {A6DE9606-8C46-4EEA-AFCC-A139D215C80C}
+		{AF9843E8-0EF1-4FBC-90AD-375172BC829B} = {43CD13B4-4C21-49C4-AEE6-7C8C6C7A3FD7}
+		{BF14497E-B2D2-49BD-80DC-71201FE94D4A} = {AF9843E8-0EF1-4FBC-90AD-375172BC829B}
+		{ED00F22F-A1DF-4620-9988-9FFEA2AECFAC} = {457EC44A-7BBE-43DC-90D8-CC90334FD829}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1484C9E2-1BE6-42A4-AAF4-63234F34E944}
