@@ -1,7 +1,7 @@
 ﻿
 namespace SagaExampleMassTransit.Contracts
 {
-    public record CreateStudentCommand
+    public record CreateStudent
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -9,7 +9,7 @@ namespace SagaExampleMassTransit.Contracts
         public string Email { get; set; }
     }
 
-    public record StudentCreatedEvent
+    public record StudentCreated
     {
         public long Id { get; set; }
         public Guid UId { get; set; } 
@@ -19,7 +19,7 @@ namespace SagaExampleMassTransit.Contracts
         public string Email { get; set; }
     }
 
-    public record CreateStudentFailedEvents
+    public record CreateStudentFailed
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

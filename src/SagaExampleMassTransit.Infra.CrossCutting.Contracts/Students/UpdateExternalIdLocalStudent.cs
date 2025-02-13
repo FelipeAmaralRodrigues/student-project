@@ -1,7 +1,7 @@
 ﻿
 namespace SagaExampleMassTransit.Contracts
 {
-    public record UpdateExternalIdLocalStudentCommand
+    public record UpdateExternalIdLocalStudent
     {
         public Guid RequestUId { get; set; }
         public Guid ThirdPlatformStudentUId { get; set; }

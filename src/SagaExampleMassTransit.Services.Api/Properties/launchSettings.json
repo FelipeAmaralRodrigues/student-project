@@ -11,7 +11,7 @@
   "profiles": {
     "SagaExampleMassTransit.Services.Api": {
       "commandName": "Project",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "api/docs",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Local"

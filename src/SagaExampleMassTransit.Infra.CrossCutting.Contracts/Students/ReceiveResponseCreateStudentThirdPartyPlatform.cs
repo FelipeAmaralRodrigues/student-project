@@ -1,7 +1,7 @@
 ﻿
 namespace SagaExampleMassTransit.Contracts
 {
-    public record ReceiveResponseCreateStudentThirdPartyPlatformCommand
+    public record ReceiveResponseCreateStudentThirdPartyPlatform
     {
         public Guid RequestUId { get; set; }
     }

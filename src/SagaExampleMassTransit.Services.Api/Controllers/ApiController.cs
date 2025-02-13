@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SagaExampleMassTransit.Domain.Mediator.Notifications;
 using SagaExampleMassTransit.Services.Api.Response;
 
-namespace SEB.Identity.Services.Api.Controllers
+namespace SagaExampleMassTransit.Services.Api.Controllers
 {
     [ApiController]
     public class ApiController : ControllerBase

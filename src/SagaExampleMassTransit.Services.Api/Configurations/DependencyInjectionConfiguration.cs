@@ -43,10 +43,12 @@ namespace SagaExampleMassTransit.Services.Api.Configurations
             services.AddMassTransit(x =>
             {
                 x.SetKebabCaseEndpointNameFormatter();
-                x.UsingAzureServiceBus((context, cfg) =>
+                x.UsingRabbitMq((context, cfg) =>
                 {
-                    var connectionString = configuration.GetConnectionString("BusConnection");
-                    cfg.Host(connectionString);
+                    cfg.Host(configuration["RabbitMq:Uri"], "/", c => {
+                        c.Username(configuration["RabbitMq:Usr"]);
+                        c.Password(configuration["RabbitMq:Pwd"]);
+                    });
                 });
             });
         }
