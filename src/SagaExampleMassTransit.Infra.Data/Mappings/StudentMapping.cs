@@ -9,7 +9,7 @@ namespace SagaExampleMassTransit.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Student> builder)
         {
             builder.HasKey(pl => pl.Id)
-                .HasName("PKtbplatformlink")
+                .HasName("PKtbstudent")
                 .IsClustered();
 
             builder.Property(pl => pl.Id)
@@ -24,28 +24,28 @@ namespace SagaExampleMassTransit.Infra.Data.Mappings
                 .IsRequired(true);
 
             builder.Property(pl => pl.FirstName)
-                .HasColumnName("id")
+                .HasColumnName("first_name")
                 .HasColumnType("varchar(128)")
                 .IsRequired(true);
 
             builder.Property(pl => pl.LastName)
-                .HasColumnName("id")
+                .HasColumnName("last_name")
                 .HasColumnType("varchar(128)")
                 .IsRequired(true);
 
             builder.Property(pl => pl.Email)
-               .HasColumnName("id")
+               .HasColumnName("email")
                .HasColumnType("varchar(128)")
                .IsRequired(true);
 
             builder.Property(pl => pl.BirthDate)
-               .HasColumnName("id")
+               .HasColumnName("birth_date")
                .HasColumnType("datetime2")
                .IsRequired(true);
 
             builder.Property(pl => pl.ThirdPartyStudentUId)
-               .HasColumnName("uniqueidentifier")
-               .HasColumnType("third_party_student_uid")
+               .HasColumnName("third_party_student_uid")
+               .HasColumnType("uniqueidentifier")
                .IsRequired(false);
 
             builder.ToTable("tb_student", "dbo");

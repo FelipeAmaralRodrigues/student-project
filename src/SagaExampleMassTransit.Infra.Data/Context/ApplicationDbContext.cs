@@ -31,6 +31,7 @@ namespace SagaExampleMassTransit.Infra.Data.Context
             if (!optionsBuilder.IsConfigured)
             {
                 base.OnConfiguring(optionsBuilder);
+
                 optionsBuilder
                     .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
                     .UseSqlServer(_configuration["ConnectionStrings:DefaultConnection"], sql =>
