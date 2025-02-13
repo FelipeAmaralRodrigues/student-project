@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using SagaExampleMassTransit.Domain.Mediator.Notifications;
+using SagaExampleMassTransit.Services.Api.Response;
 
 namespace SagaExampleMassTransit.Services.Api.Filters
 {
