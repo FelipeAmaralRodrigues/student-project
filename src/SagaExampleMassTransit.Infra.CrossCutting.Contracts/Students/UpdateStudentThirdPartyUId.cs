@@ -1,23 +1,24 @@
 ﻿
 namespace SagaExampleMassTransit.Contracts
 {
-    public record UpdateExternalIdLocalStudent
+    public record UpdateStudentThirdPartyUId
     {
         public Guid RequestUId { get; set; }
-        public Guid ThirdPlatformStudentUId { get; set; }
-    }
-
-    public record ExternalIdLocalStudentUpdatedEvent
-    {
-        public Guid RequestUId { get; set; }
-        public long StudentId { get; set; }
         public Guid StudentUId { get; set; }
         public Guid ThirdPlatformStudentUId { get; set; }
     }
 
-    public record UpdateExternalIdLocalStudentFailedEvent
+    public record StudentThirdPartyUIdUpdated
     {
         public Guid RequestUId { get; set; }
+        public Guid StudentUId { get; set; }
+        public Guid ThirdPlatformStudentUId { get; set; }
+    }
+
+    public record UpdateStudentThirdPartyUIdFailed
+    {
+        public Guid RequestUId { get; set; }
+        public Guid StudentUId { get; set; }
         public Guid ThirdPlatformStudentUId { get; set; }
 
         public string ExceptionType { get; set; }

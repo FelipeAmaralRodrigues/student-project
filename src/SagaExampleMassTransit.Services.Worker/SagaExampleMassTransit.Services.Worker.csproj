@@ -11,4 +11,12 @@
     <Folder Include="Consumers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.3.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SagaExampleMassTransit.Domain\SagaExampleMassTransit.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

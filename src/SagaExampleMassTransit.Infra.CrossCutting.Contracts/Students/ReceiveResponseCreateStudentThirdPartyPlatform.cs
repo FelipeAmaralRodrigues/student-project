@@ -4,16 +4,19 @@ namespace SagaExampleMassTransit.Contracts
     public record ReceiveResponseCreateStudentThirdPartyPlatform
     {
         public Guid RequestUId { get; set; }
+        public Guid StudentUId { get; set; }
     }
 
-    public record ResponseCreateStudentThirdPartyPlatformWaitingEvent
+    public record ResponseCreateStudentThirdPartyPlatformWaited
     {
         public Guid RequestUId { get; set; }
+        public Guid StudentUId { get; set; }
     }
 
-    public record ResponseCreateStudentThirdPartyPlatformReceivedEvent
+    public record ResponseCreateStudentThirdPartyPlatformReceived
     {
         public Guid RequestUId { get; set; }
+        public Guid StudentUId { get; set; }
 
         public long Id { get; set; }
         public Guid UId { get; set; }
@@ -23,9 +26,10 @@ namespace SagaExampleMassTransit.Contracts
         public string Email { get; set; }
     }
 
-    public record ReceiveResponseCreateStudentThirdPartyPlatformFailedEvent
+    public record ReceiveResponseCreateStudentThirdPartyPlatformFailed
     {
         public Guid RequestUId { get; set; }
+        public Guid StudentUId { get; set; }
 
         public string ExceptionType { get; set; }
         public string ExceptionMessage { get; set; }
