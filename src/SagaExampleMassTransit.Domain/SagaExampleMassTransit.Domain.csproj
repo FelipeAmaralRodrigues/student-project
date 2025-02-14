@@ -14,8 +14,4 @@
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Student\Queries\" />
-	</ItemGroup>
 </Project>

@@ -18,10 +18,10 @@
             return new Student
             {
                 UId = Guid.NewGuid(),
-                FirstName = firstName,
-                LastName = lastName,
+                FirstName = firstName.Trim(),
+                LastName = lastName.Trim(),
                 BirthDate = birthDate,
-                Email = email
+                Email = email.Trim().ToLower()
             };
         }
 

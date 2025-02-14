@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SagaExampleMassTransit.Domain.Mediator;
 using SagaExampleMassTransit.Domain.Mediator.Notifications;
-using SagaExampleMassTransit.Domain.Student.Commands;
+using SagaExampleMassTransit.Domain.Students.Commands;
+using SagaExampleMassTransit.Domain.Students.Queries;
 
 namespace SagaExampleMassTransit.Services.Api.Controllers
 {
@@ -25,11 +26,28 @@ namespace SagaExampleMassTransit.Services.Api.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("students")]
+        public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var students = await _mediator.Query(new GetAllQuery(), cancellationToken);
+            return ResponseApi(students);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("student/{uid}")]
+        public async Task<IActionResult> GetByUIdAsync(Guid uid,CancellationToken cancellationToken)
+        {
+            var student = await _mediator.Query(new GetByUIdQuery { UId = uid}, cancellationToken);
+            return ResponseApi(student);
+        }
+
+        [AllowAnonymous]
         [HttpPost("student/create")]
-        public async Task<IActionResult> Register([FromBody] CreateStudentCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateStudentAsync([FromBody] CreateStudentCommand command, CancellationToken cancellationToken)
         {
             await _mediator.SendCommand(command, cancellationToken);
-            return ResponseApi();
+            return ResponseApi(command);
         }
+
     }
 }

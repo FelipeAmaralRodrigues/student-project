@@ -7,8 +7,8 @@ using SagaExampleMassTransit.Domain.Mediator;
 using SagaExampleMassTransit.Services.Api.Filters;
 using SagaExampleMassTransit.Infra.Data.Data;
 using SagaExampleMassTransit.Domain.Data;
-using SagaExampleMassTransit.Domain.Repositories;
 using SagaExampleMassTransit.Infra.Data.Repositories;
+using SagaExampleMassTransit.Domain.Students.Repositories;
 
 namespace SagaExampleMassTransit.Services.Api.Configurations
 {
@@ -32,6 +32,7 @@ namespace SagaExampleMassTransit.Services.Api.Configurations
             services.AddScoped<GlobalExceptionHandlingFilter>();
 
             // repositories read only
+            services.AddScoped<IStudentReadOnlyRepository, StudentReadOnlyRepository>();
 
             // repositories
             services.AddScoped<IStudentRepository, StudentRepository>();

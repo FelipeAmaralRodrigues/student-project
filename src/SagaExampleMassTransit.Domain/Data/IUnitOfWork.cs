@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
-using SagaExampleMassTransit.Domain.Repositories;
+using SagaExampleMassTransit.Domain.Students.Repositories;
 
 namespace SagaExampleMassTransit.Domain.Data
 {

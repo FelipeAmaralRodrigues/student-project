@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SagaExampleMassTransit.Domain.Data;
 using SagaExampleMassTransit.Infra.Data.Context;
-using SagaExampleMassTransit.Domain.Repositories;
+using SagaExampleMassTransit.Domain.Students.Repositories;
 
 namespace SagaExampleMassTransit.Infra.Data.Data
 {
