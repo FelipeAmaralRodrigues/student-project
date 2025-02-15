@@ -36,7 +36,7 @@ namespace StudentProject.Services.Worker.Sagas
                     .TransitionTo(RequestingThirdPartyPlatform)
                     .Send(context => new SendRequestCreateStudentThirdPartyPlatform
                     {
-                        StudentUId = context.Message.UId,
+                        UId = context.Message.UId,
                         FirstName = context.Message.FirstName,
                         LastName = context.Message.LastName,
                         BirthDate = context.Message.BirthDate,

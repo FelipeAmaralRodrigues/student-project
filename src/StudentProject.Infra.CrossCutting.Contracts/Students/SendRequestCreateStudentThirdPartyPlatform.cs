@@ -3,7 +3,7 @@ namespace StudentProject.Contracts
 {
     public record SendRequestCreateStudentThirdPartyPlatform
     {
-        public Guid StudentUId { get; set; }
+        public Guid UId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
@@ -13,7 +13,7 @@ namespace StudentProject.Contracts
     public record RequestCreateStudentThirdPartyPlatformSended
     {
         public Guid RequestUId { get; set; }
-        public Guid StudentUId { get; set; }
+        public Guid UId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
@@ -22,7 +22,7 @@ namespace StudentProject.Contracts
 
     public record SendRequestCreateStudentThirdPartyPlatformFailed
     {
-        public Guid StudentUId { get; set; }
+        public Guid UId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }

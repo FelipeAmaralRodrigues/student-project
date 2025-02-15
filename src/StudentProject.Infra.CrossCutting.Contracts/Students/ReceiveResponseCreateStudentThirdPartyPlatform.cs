@@ -17,13 +17,7 @@ namespace StudentProject.Contracts
     {
         public Guid RequestUId { get; set; }
         public Guid StudentUId { get; set; }
-
-        public long Id { get; set; }
         public Guid UId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime BirthDate { get; set; }
-        public string Email { get; set; }
     }
 
     public record ReceiveResponseCreateStudentThirdPartyPlatformFailed
