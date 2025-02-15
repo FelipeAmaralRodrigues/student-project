@@ -1,6 +1,5 @@
 ﻿using MassTransit;
 using MediatR;
-using StudentProject.Contracts;
 using StudentProject.Domain.Data;
 using StudentProject.Domain.Entities;
 using StudentProject.Domain.Mediator;
@@ -50,7 +49,6 @@ namespace StudentProject.Domain.Students.Commands
             }
             catch (Exception e)
             {
-                // Em caso de exceção, gera uma notificação de domínio indicando erro interno do servidor.
                 await _notifications.Handle(new DomainNotification("request", "Internal server error. Please try again later"), cancellationToken);
                 throw;
             }

@@ -5,7 +5,7 @@ using StudentProject.Domain.Mediator;
 using StudentProject.Domain.Mediator.Notifications;
 using StudentProject.Domain.Students.Commands;
 
-namespace StudentProject.Services.Worker.Consumers
+namespace StudentProject.Services.Bus.Consumer.Consumers
 {
     public class CreateStudentConsumer : IConsumer<CreateStudent>
     {
@@ -15,6 +15,7 @@ namespace StudentProject.Services.Worker.Consumers
         public CreateStudentConsumer(IMediatorHandler mediator, INotificationHandler<DomainNotification> notifications)
         {
             _mediator = mediator;
+            _notifications = (DomainNotificationHandler)notifications;
         }
 
         public async Task Consume(ConsumeContext<CreateStudent> context)
@@ -32,7 +33,7 @@ namespace StudentProject.Services.Worker.Consumers
 
                 if (_notifications.HasNotifications())
                 {
-                    await context.Publish<CreateStudentValidationFailed>(new CreateStudentValidationFailed
+                    await context.Publish(new CreateStudentValidationFailed
                     {
                         FirstName = context.Message.FirstName,
                         LastName = context.Message.LastName,
@@ -41,9 +42,9 @@ namespace StudentProject.Services.Worker.Consumers
                         ValidationErrors = _notifications.GetNotifications().ToDictionary(m => m.Key, m => m.Value)
                     });
                 }
-                else 
+                else
                 {
-                    await context.Publish<StudentCreated>(new StudentCreated
+                    await context.Publish(new StudentCreated
                     {
                         UId = command.UId,
                         FirstName = context.Message.FirstName,
@@ -55,7 +56,7 @@ namespace StudentProject.Services.Worker.Consumers
             }
             catch (Exception e)
             {
-                await context.Publish<CreateStudentFailed>(new CreateStudentFailed
+                await context.Publish(new CreateStudentFailed
                 {
                     FirstName = context.Message.FirstName,
                     LastName = context.Message.LastName,

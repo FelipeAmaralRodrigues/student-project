@@ -1,23 +1,23 @@
 ﻿using MassTransit;
 using StudentProject.Contracts;
 
-namespace StudentProject.Services.Worker.Consumers
+namespace StudentProject.Services.Bus.Consumer.Consumers
 {
-    public class SendRequestCreateStudentThirdPartyPlatformConsumer : IConsumer<SendRequestCreateStudentThirdPartyPlatform>
+    public class SendRequestCreateStudentThirdPartyUIdConsumer : IConsumer<SendRequestCreateStudentThirdPartyUId>
     {
-        public SendRequestCreateStudentThirdPartyPlatformConsumer()
+        public SendRequestCreateStudentThirdPartyUIdConsumer()
         {
-            
+
         }
 
-        public async Task Consume(ConsumeContext<SendRequestCreateStudentThirdPartyPlatform> context)
+        public async Task Consume(ConsumeContext<SendRequestCreateStudentThirdPartyUId> context)
         {
             try
             {
                 Guid requestUId = Guid.NewGuid();
 
                 // simula um request para uma plataforma de terceiro gerando um id de request
-                await context.Publish<RequestCreateStudentThirdPartyPlatformSended>(new RequestCreateStudentThirdPartyPlatformSended
+                await context.Publish(new RequestCreateStudentThirdPartyUIdSended
                 {
                     RequestUId = requestUId,
                     UId = context.Message.UId,
@@ -29,7 +29,7 @@ namespace StudentProject.Services.Worker.Consumers
             }
             catch (Exception e)
             {
-                await context.Publish<SendRequestCreateStudentThirdPartyPlatformFailed>(new SendRequestCreateStudentThirdPartyPlatformFailed
+                await context.Publish(new SendRequestCreateStudentThirdPartyUIdFailed
                 {
                     UId = context.Message.UId,
                     FirstName = context.Message.FirstName,

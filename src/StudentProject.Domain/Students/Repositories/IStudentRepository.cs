@@ -7,7 +7,7 @@ namespace StudentProject.Domain.Students.Repositories
     {
         void Create(Student student);
         Task CreateAsync(Student student, CancellationToken cancellationToken);
-        void UpdateThirdPartyStudentUIdByStudentId(long studentId, Guid thirdPartyStudentUId);
-        Task UpdateThirdPartyStudentUIdByStudentIdAsync(long studentId, Guid thirdPartyStudentUId, CancellationToken cancellationToken);
+        void UpdateThirdPartyUIdById(long id, Guid thirdPartyUId);
+        Task UpdateThirdPartyUIdByIdAsync(long id, Guid thirdPartyUId, CancellationToken cancellationToken);
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentProject.Infra.Data.Context;
 
@@ -11,9 +12,11 @@ using StudentProject.Infra.Data.Context;
 namespace StudentProject.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250215194231_AlterColumnStudentThirdPartyUId")]
+    partial class AlterColumnStudentThirdPartyUId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,12 +68,6 @@ namespace StudentProject.Infra.Data.Migrations
                         .HasName("PKtbstudent");
 
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("UId")
-                        .IsUnique();
 
                     b.ToTable("tb_student", "dbo");
                 });

@@ -90,7 +90,7 @@ namespace StudentProject.Services.Api.Controllers
                     Email = command.Email,
 
                     ExceptionMessage = e.Message.ToString(),
-                    ExceptionStackTrace = e.StackTrace,
+                    ExceptionStackTrace = e.StackTrace, 
                     ExceptionType = e.GetType().ToString(),
                 });
             }

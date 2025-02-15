@@ -10,8 +10,6 @@ namespace StudentProject.Services.Api.Configurations
     {
         public static void AddApiConfig(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>();
-
             services
                 .AddMvcCore(o =>
                 {

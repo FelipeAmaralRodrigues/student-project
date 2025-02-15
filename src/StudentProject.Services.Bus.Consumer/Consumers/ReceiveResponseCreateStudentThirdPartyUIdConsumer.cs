@@ -1,15 +1,15 @@
 ﻿using MassTransit;
 using StudentProject.Contracts;
 
-namespace StudentProject.Services.Worker.Consumers
+namespace StudentProject.Services.Bus.Consumer.Consumers
 {
-    public class ReceiveResponseCreateStudentThirdPartyPlatformConsumer : IConsumer<ReceiveResponseCreateStudentThirdPartyPlatform>
+    public class ReceiveResponseCreateStudentThirdPartyUIdConsumer : IConsumer<ReceiveResponseCreateStudentThirdPartyUId>
     {
-        public ReceiveResponseCreateStudentThirdPartyPlatformConsumer()
+        public ReceiveResponseCreateStudentThirdPartyUIdConsumer()
         {
         }
 
-        public async Task Consume(ConsumeContext<ReceiveResponseCreateStudentThirdPartyPlatform> context)
+        public async Task Consume(ConsumeContext<ReceiveResponseCreateStudentThirdPartyUId> context)
         {
             try
             {
@@ -18,26 +18,27 @@ namespace StudentProject.Services.Worker.Consumers
                 int chance = random.Next(1, 101);
                 if (chance <= 80)
                 {
-                    await context.Publish<ResponseCreateStudentThirdPartyPlatformWaited>(new ResponseCreateStudentThirdPartyPlatformWaited
+                    await context.Publish(new ResponseCreateStudentThirdPartyUIdWaited
                     {
                         RequestUId = context.Message.RequestUId,
                         StudentUId = context.Message.StudentUId
                     });
-                } else
+                }
+                else
                 {
                     Guid thirdPartyPlatformUId = Guid.NewGuid();
 
-                    await context.Publish<ResponseCreateStudentThirdPartyPlatformReceived>(new ResponseCreateStudentThirdPartyPlatformReceived
+                    await context.Publish(new ResponseCreateStudentThirdPartyUIdReceived
                     {
                         RequestUId = context.Message.RequestUId,
                         StudentUId = context.Message.StudentUId,
-                        UId = thirdPartyPlatformUId
+                        ThirdPartyUId = thirdPartyPlatformUId
                     });
                 }
             }
             catch (Exception e)
             {
-                await context.Publish<ReceiveResponseCreateStudentThirdPartyPlatformFailed>(new ReceiveResponseCreateStudentThirdPartyPlatformFailed
+                await context.Publish(new ReceiveResponseCreateStudentThirdPartyUIdFailed
                 {
                     RequestUId = context.Message.RequestUId,
                     StudentUId = context.Message.StudentUId,

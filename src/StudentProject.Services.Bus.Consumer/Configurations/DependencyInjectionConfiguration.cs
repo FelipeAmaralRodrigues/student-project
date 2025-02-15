@@ -1,14 +1,13 @@
 using MediatR;
 using Serilog;
-using Microsoft.AspNetCore.Authorization;
-using MassTransit;
 using StudentProject.Domain.Mediator.Notifications;
 using StudentProject.Domain.Mediator;
-using StudentProject.Services.Api.Filters;
-using StudentProject.Infra.Data.Data;
 using StudentProject.Domain.Data;
-using StudentProject.Infra.Data.Repositories;
 using StudentProject.Domain.Students.Repositories;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using StudentProject.Infra.Data.Repositories;
+using StudentProject.Infra.Data.Data;
 
 namespace StudentProject.Services.Api.Configurations
 {
@@ -28,21 +27,6 @@ namespace StudentProject.Services.Api.Configurations
 
             // loggers
             services.AddLogging(builder => builder.AddSerilog());
-            services.AddScoped<ILogger<GlobalExceptionHandlingFilter>, Logger<GlobalExceptionHandlingFilter>>();
-            services.AddScoped<GlobalExceptionHandlingFilter>();
-
-            // bus
-            services.AddMassTransit(x =>
-            {
-                x.SetKebabCaseEndpointNameFormatter();
-                x.UsingRabbitMq((context, cfg) =>
-                {
-                    cfg.Host(configuration["RabbitMq:Uri"], "/", c => {
-                        c.Username(configuration["RabbitMq:Usr"]);
-                        c.Password(configuration["RabbitMq:Pwd"]);
-                    });
-                });
-            });
         }
     }
 }

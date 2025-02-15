@@ -8,7 +8,7 @@
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
-        public Guid? ThirdPartyStudentUId { get; set; }
+        public Guid? ThirdPartyUId { get; set; }
     }
 
     public static class StudentFactory
@@ -25,9 +25,9 @@
             };
         }
 
-        public static Student UpdateThirPartyStudentUId(Student student, Guid thirdPartyStudentUId)
+        public static Student UpdateThirPartyUId(Student student, Guid thirdPartyUId)
         {
-            student.ThirdPartyStudentUId = thirdPartyStudentUId;
+            student.ThirdPartyUId = thirdPartyUId;
             return student;
         }
     }

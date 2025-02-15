@@ -39,6 +39,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <ProjectReference Include="..\StudentProject.Infra.CrossCutting.Bus\StudentProject.Infra.CrossCutting.Bus.csproj" />
 	  <ProjectReference Include="..\StudentProject.Infra.Data\StudentProject.Infra.Data.csproj" />
 	</ItemGroup>
 	

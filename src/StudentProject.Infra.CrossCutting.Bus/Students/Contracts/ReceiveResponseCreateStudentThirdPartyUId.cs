@@ -1,25 +1,29 @@
 ﻿
 namespace StudentProject.Contracts
 {
-    public record UpdateStudentThirdPartyUId
+    public record ReceiveResponseCreateStudentThirdPartyUId
     {
         public Guid RequestUId { get; set; }
         public Guid StudentUId { get; set; }
-        public Guid ThirdPlatformStudentUId { get; set; }
     }
 
-    public record StudentThirdPartyUIdUpdated
+    public record ResponseCreateStudentThirdPartyUIdWaited
     {
         public Guid RequestUId { get; set; }
         public Guid StudentUId { get; set; }
-        public Guid ThirdPlatformStudentUId { get; set; }
     }
 
-    public record UpdateStudentThirdPartyUIdFailed
+    public record ResponseCreateStudentThirdPartyUIdReceived
     {
         public Guid RequestUId { get; set; }
         public Guid StudentUId { get; set; }
-        public Guid ThirdPlatformStudentUId { get; set; }
+        public Guid ThirdPartyUId { get; set; }
+    }
+
+    public record ReceiveResponseCreateStudentThirdPartyUIdFailed
+    {
+        public Guid RequestUId { get; set; }
+        public Guid StudentUId { get; set; }
 
         public string ExceptionType { get; set; }
         public string ExceptionMessage { get; set; }

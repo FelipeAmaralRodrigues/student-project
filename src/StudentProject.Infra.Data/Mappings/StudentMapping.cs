@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using StudentProject.Domain.Entities;
+using System.Reflection.Emit;
 
 namespace StudentProject.Infra.Data.Mappings
 {
@@ -43,10 +44,18 @@ namespace StudentProject.Infra.Data.Mappings
                .HasColumnType("datetime2")
                .IsRequired(true);
 
-            builder.Property(pl => pl.ThirdPartyStudentUId)
-               .HasColumnName("third_party_student_uid")
+            builder.Property(pl => pl.ThirdPartyUId)
+               .HasColumnName("third_party_uid")
                .HasColumnType("uniqueidentifier")
-               .IsRequired(false);
+            .IsRequired(false);
+
+            builder
+                .HasIndex(s => s.UId)
+                .IsUnique();
+
+            builder
+                .HasIndex(s => s.Email)
+                .IsUnique();
 
             builder.ToTable("tb_student", "dbo");
         }

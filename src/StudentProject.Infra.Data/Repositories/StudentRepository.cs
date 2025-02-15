@@ -25,14 +25,14 @@ namespace StudentProject.Infra.Data.Repositories
             await DbSet.AddAsync(student);
         }
 
-        public void UpdateThirdPartyStudentUIdByStudentId(long studentId, Guid thirdPartyStudentUId)
+        public void UpdateThirdPartyUIdById(long studentId, Guid thirdPartyUId)
         {
-            DbSet.ExecuteUpdate(a => a.SetProperty(a => a.ThirdPartyStudentUId, thirdPartyStudentUId));
+            DbSet.ExecuteUpdate(a => a.SetProperty(a => a.ThirdPartyUId, thirdPartyUId));
         }
 
-        public async Task UpdateThirdPartyStudentUIdByStudentIdAsync(long studentId, Guid thirdPartyStudentUId, CancellationToken cancellationToken)
+        public async Task UpdateThirdPartyUIdByIdAsync(long studentId, Guid thirdPartyUId, CancellationToken cancellationToken)
         {
-            await DbSet.ExecuteUpdateAsync(a => a.SetProperty(a => a.ThirdPartyStudentUId, thirdPartyStudentUId), cancellationToken);
+            await DbSet.ExecuteUpdateAsync(a => a.SetProperty(a => a.ThirdPartyUId, thirdPartyUId), cancellationToken);
 
         }
     }
