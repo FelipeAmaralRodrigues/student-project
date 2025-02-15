@@ -11,12 +11,20 @@ namespace StudentProject.Contracts
 
     public record StudentCreated
     {
-        public long Id { get; set; }
         public Guid UId { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
+    }
+
+    public record CreateStudentValidationFailed
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string Email { get; set; }
+        public Dictionary<string, string> ValidationErrors { get; set; }
     }
 
     public record CreateStudentFailed

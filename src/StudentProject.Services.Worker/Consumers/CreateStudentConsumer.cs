@@ -1,38 +1,57 @@
 ﻿using MassTransit;
 using MediatR;
 using StudentProject.Contracts;
-using StudentProject.Domain.Data;
-using StudentProject.Domain.Entities;
+using StudentProject.Domain.Mediator;
 using StudentProject.Domain.Mediator.Notifications;
-using System.Threading;
+using StudentProject.Domain.Students.Commands;
 
 namespace StudentProject.Services.Worker.Consumers
 {
     public class CreateStudentConsumer : IConsumer<CreateStudent>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public CreateStudentConsumer(IUnitOfWork unitOfWork)
+        private readonly IMediatorHandler _mediator;
+        private readonly DomainNotificationHandler _notifications;
+
+        public CreateStudentConsumer(IMediatorHandler mediator, INotificationHandler<DomainNotification> notifications)
         {
-            _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
 
         public async Task Consume(ConsumeContext<CreateStudent> context)
         {
             try
             {
-                var student = StudentFactory.CreateStudent(context.Message.FirstName, context.Message.LastName, context.Message.BirthDate, context.Message.Email);
-                await _unitOfWork.StudentRepository.CreateAsync(student, context.CancellationToken);
-                await _unitOfWork.SaveAsync(context.CancellationToken);
-
-                await context.Publish<StudentCreated>(new StudentCreated
+                var command = new CreateStudentCommand
                 {
-                    Id = student.Id,
-                    UId = student.UId,
-                    FirstName = student.FirstName,
-                    LastName = student.LastName,
-                    BirthDate = student.BirthDate,
-                    Email = student.Email
-                });
+                    FirstName = context.Message.FirstName,
+                    LastName = context.Message.LastName,
+                    BirthDate = context.Message.BirthDate,
+                    Email = context.Message.Email
+                };
+                await _mediator.SendCommand(command, context.CancellationToken);
+
+                if (_notifications.HasNotifications())
+                {
+                    await context.Publish<CreateStudentValidationFailed>(new CreateStudentValidationFailed
+                    {
+                        FirstName = context.Message.FirstName,
+                        LastName = context.Message.LastName,
+                        BirthDate = context.Message.BirthDate,
+                        Email = context.Message.Email,
+                        ValidationErrors = _notifications.GetNotifications().ToDictionary(m => m.Key, m => m.Value)
+                    });
+                }
+                else 
+                {
+                    await context.Publish<StudentCreated>(new StudentCreated
+                    {
+                        UId = command.UId,
+                        FirstName = context.Message.FirstName,
+                        LastName = context.Message.LastName,
+                        BirthDate = context.Message.BirthDate,
+                        Email = context.Message.Email,
+                    });
+                }
             }
             catch (Exception e)
             {

@@ -22,7 +22,7 @@ namespace StudentProject.Services.Worker.Sagas
             InstanceState(x => x.CurrentState);
 
             Event(() => StudentCreated, e => e.CorrelateById(m => m.Message.UId));
-            Event(() => RequestCreateStudentThirdPartyPlatformSended, e => e.CorrelateById(m => m.Message.StudentUId));
+            Event(() => RequestCreateStudentThirdPartyPlatformSended, e => e.CorrelateById(m => m.Message.UId));
             Event(() => ResponseCreateStudentThirdPartyPlatformWaited, e => e.CorrelateById(m => m.Message.StudentUId));
             Event(() => ResponseCreateStudentThirdPartyPlatformReceived, e => e.CorrelateById(m => m.Message.StudentUId));
             Event(() => StudentThirdPartyUIdUpdated, e => e.CorrelateById(m => m.Message.StudentUId));
@@ -50,7 +50,7 @@ namespace StudentProject.Services.Worker.Sagas
                     .Send(context => new ReceiveResponseCreateStudentThirdPartyPlatform
                     {
                        RequestUId = context.Message.RequestUId,
-                       StudentUId = context.Message.StudentUId
+                       StudentUId = context.Message.UId
                     }));
 
             During(ReceivingResponseThirdPartyPlatform,

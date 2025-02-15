@@ -2,12 +2,14 @@
 using StudentProject.Contracts;
 using StudentProject.Domain.Data;
 using StudentProject.Domain.Entities;
+using StudentProject.Domain.Mediator.Notifications;
 
 namespace StudentProject.Services.Worker.Consumers
 {
     public class UpdateStudentThirdPartyUIdConsumer : IConsumer<UpdateStudentThirdPartyUId>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly DomainNotificationHandler _notifications;
 
         public UpdateStudentThirdPartyUIdConsumer(IUnitOfWork unitOfWork)
         {

@@ -11,7 +11,7 @@ namespace StudentProject.Domain.Mediator.Messages
         }
     }
 
-    public abstract class Command<TResult> : Message, IRequest<ValidationResult> where TResult : ValidationResult
+    public abstract class Command<TResult> : Message, IRequest<TResult> where TResult : class
     {
         protected Command()
         {

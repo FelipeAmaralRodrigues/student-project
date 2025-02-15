@@ -13,5 +13,7 @@ namespace StudentProject.Domain.Students.Repositories
         Task<Student?> GetByUIdAsync(Guid uid, CancellationToken cancellationToken);
         Student? GetByEmail(string email);
         Task<Student?> GetByEmailAsync(string email, CancellationToken cancellationToken);
+        Student? GetByThirdPartyStudentUId(Guid thirdPartyPlatformUId);
+        Task<Student?> GetByThirdPartyStudentUIdAsync(Guid thirdPartyPlatformUId, CancellationToken cancellationToken);
     }
 }

@@ -59,6 +59,21 @@ namespace StudentProject.Infra.Data.Repositories
                     select l).FirstOrDefaultAsync(cancellationToken);
         }
 
+        public Student? GetByThirdPartyStudentUId(Guid thirdPartyPlatformUId)
+        {
+            return (from l in Entities
+                    where l.ThirdPartyStudentUId == thirdPartyPlatformUId
+                    select l).FirstOrDefault();
+        }
+
+        public async Task<Student?> GetByThirdPartyStudentUIdAsync(Guid thirdPartyPlatformUId, CancellationToken cancellationToken)
+        {
+            return await
+                  (from l in Entities
+                   where l.ThirdPartyStudentUId == thirdPartyPlatformUId
+                   select l).FirstOrDefaultAsync(cancellationToken);
+        }
+
         public Student? GetByUId(Guid uid)
         {
             return (from l in Entities
