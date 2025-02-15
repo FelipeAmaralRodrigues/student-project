@@ -7,6 +7,8 @@ namespace StudentProject.Domain.Mediator
     {
         Task PublishEvent<T>(T e, CancellationToken cancellationToken = default) where T : Event;
         Task<bool> SendCommand<T>(T c, CancellationToken cancellationToken = default) where T : Command;
+        Task<TResponse> SendCommand<TResponse>(Command<TResponse> c, CancellationToken cancellationToken = default) 
+            where TResponse : class;
         Task<TResponse?> Query<TResponse>(IRequest<TResponse> query, CancellationToken cancellationToken = default);
     }
 
@@ -27,5 +29,9 @@ namespace StudentProject.Domain.Mediator
 
         public async Task<TResponse?> Query<TResponse>(IRequest<TResponse> query, CancellationToken cancellationToken = default)
         => await _mediator.Send(query, cancellationToken);
+
+        public async Task<TResponse> SendCommand<TResponse>(Command<TResponse> c, CancellationToken cancellationToken = default)
+            where TResponse : class
+            => await _mediator.Send<TResponse>(c, cancellationToken);
     }
 }
