@@ -1,20 +1,17 @@
 ﻿using MassTransit;
-using StudentProject.Contracts;
-using StudentProject.Infra.CrossCutting.Bus.Sagas.Datas;
 
-namespace StudentProject.Services.Worker.Sagas
+namespace StudentProject.Contracts
 {
     public class StudentCreatedThirdPartyRegistrationSaga 
         : MassTransitStateMachine<StudentCreatedThirdPartyRegistrationSagaData>
     {
         public State RequestingCreateStudentThirdPartyUId {  get; set; }
         public State ReceivingResponseCreateStudentThirdPartyUId {  get; set; }
-        public State WaitingResponseThirdPartyUId {  get; set; }
         public State UpdatingStudentThirdPartyUId {  get; set; }
 
         public Event<StudentCreated> StudentCreated { get; set; }
         public Event<RequestCreateStudentThirdPartyUIdSended> RequestCreateStudentThirdPartyUIdSended { get; set; }
-        public Event<ResponseCreateStudentThirdPartyUIdWaited> ResponseCreateStudentThirdPartyUIdWaited { get; set; }
+        public Event<ResponseCreateStudentThirdPartyUIdNotReceived> ResponseCreateStudentThirdPartyUIdNotReceived { get; set; }
         public Event<ResponseCreateStudentThirdPartyUIdReceived> ResponseCreateStudentThirdPartyUIdReceived { get; set; }
         public Event<StudentThirdPartyUIdUpdated> StudentThirdPartyUIdUpdated { get; set; }
 
@@ -24,18 +21,14 @@ namespace StudentProject.Services.Worker.Sagas
 
             Event(() => StudentCreated, e => e.CorrelateById(m => m.Message.UId));
             Event(() => RequestCreateStudentThirdPartyUIdSended, e => e.CorrelateById(m => m.Message.UId));
-            Event(() => ResponseCreateStudentThirdPartyUIdWaited, e => e.CorrelateById(m => m.Message.StudentUId));
+            Event(() => ResponseCreateStudentThirdPartyUIdNotReceived, e => e.CorrelateById(m => m.Message.StudentUId));
             Event(() => ResponseCreateStudentThirdPartyUIdReceived, e => e.CorrelateById(m => m.Message.StudentUId));
             Event(() => StudentThirdPartyUIdUpdated, e => e.CorrelateById(m => m.Message.StudentUId));
 
             Initially(
                 When(StudentCreated)
-                    .Then(context =>
-                    {
-                        context.Saga.StudentUId = context.Message.UId;
-                    })
                     .TransitionTo(RequestingCreateStudentThirdPartyUId)
-                    .Send(context => new SendRequestCreateStudentThirdPartyUId
+                    .Publish(context => new SendRequestCreateStudentThirdPartyUId
                     {
                         UId = context.Message.UId,
                         FirstName = context.Message.FirstName,
@@ -46,19 +39,26 @@ namespace StudentProject.Services.Worker.Sagas
 
             During(RequestingCreateStudentThirdPartyUId,
                 When(RequestCreateStudentThirdPartyUIdSended)
-                    .Then(context => context.Saga.RequestCreateStudentThirdPartyUIdSendedAt = DateTime.UtcNow)
+                    .Then(context =>
+                    {
+                        context.Saga.RequestCreateStudentThirdPartyUIdSendedAt = DateTime.UtcNow;
+                        context.Saga.RequestUId = context.Message.RequestUId;
+                    })
                     .TransitionTo(ReceivingResponseCreateStudentThirdPartyUId)
-                    .Send(context => new ReceiveResponseCreateStudentThirdPartyUId
+                    .Publish(context => new ReceiveResponseCreateStudentThirdPartyUId
                     {
                        RequestUId = context.Message.RequestUId,
                        StudentUId = context.Message.UId
                     }));
 
             During(ReceivingResponseCreateStudentThirdPartyUId,
-                When(ResponseCreateStudentThirdPartyUIdWaited)
-                    .Then(context => context.Saga.ResponseCreateStudentThirdPartyUIdWaitedLastAt = DateTime.UtcNow)
+                When(ResponseCreateStudentThirdPartyUIdNotReceived)
+                    .Then(context =>
+                    {
+                        context.Saga.ResponseCreateStudentThirdPartyUIdNotReceivedLastAt = DateTime.UtcNow;                        
+                    })
                     .TransitionTo(ReceivingResponseCreateStudentThirdPartyUId)
-                    .Send(context => new ReceiveResponseCreateStudentThirdPartyUId
+                    .Publish(context => new ReceiveResponseCreateStudentThirdPartyUId
                     {
                         RequestUId = context.Message.RequestUId,
                         StudentUId = context.Message.StudentUId
@@ -69,7 +69,7 @@ namespace StudentProject.Services.Worker.Sagas
                         context.Saga.ResponseCreateStudentThirdPartyUIdReceivedAt = DateTime.UtcNow;
                     })
                     .TransitionTo(UpdatingStudentThirdPartyUId)
-                    .Send(context => new UpdateStudentThirdPartyUId
+                    .Publish(context => new UpdateStudentThirdPartyUId
                     {
                         RequestUId = context.Message.RequestUId,
                         StudentUId = context.Message.StudentUId,

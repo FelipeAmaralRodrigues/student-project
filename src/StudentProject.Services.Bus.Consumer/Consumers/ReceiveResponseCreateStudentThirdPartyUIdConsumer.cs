@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using StudentProject.Contracts;
 
-namespace StudentProject.Services.Bus.Consumer.Consumers
+namespace StudentProject.Contracts
 {
     public class ReceiveResponseCreateStudentThirdPartyUIdConsumer : IConsumer<ReceiveResponseCreateStudentThirdPartyUId>
     {
@@ -18,7 +18,7 @@ namespace StudentProject.Services.Bus.Consumer.Consumers
                 int chance = random.Next(1, 101);
                 if (chance <= 80)
                 {
-                    await context.Publish(new ResponseCreateStudentThirdPartyUIdWaited
+                    await context.Publish(new ResponseCreateStudentThirdPartyUIdNotReceived
                     {
                         RequestUId = context.Message.RequestUId,
                         StudentUId = context.Message.StudentUId

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using StudentProject.Infra.CrossCutting.Bus.Sagas.Datas;
+using StudentProject.Contracts;
 using StudentProject.Infra.CrossCutting.Bus.Sagas.Mapping;
 
 namespace StudentProject.Infra.CrossCutting.Bus.Sagas.Context

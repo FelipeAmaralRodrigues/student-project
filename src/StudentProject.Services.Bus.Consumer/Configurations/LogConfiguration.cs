@@ -11,9 +11,9 @@ namespace StudentProject.Services.Bus.Consumer.Configurations
         {
             host.UseSerilog((host, log) =>
             {
-                if (host.HostingEnvironment.IsProduction())
-                    log.MinimumLevel.Information();
-                else
+                //if (host.HostingEnvironment.IsProduction())
+                //    log.MinimumLevel.Information();
+                //else
                     log.MinimumLevel.Debug();
 
                 log.MinimumLevel.Override("Microsoft", LogEventLevel.Information);

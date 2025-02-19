@@ -23,7 +23,7 @@ namespace StudentProject.Infra.CrossCutting.Bus.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("StudentProject.Infra.CrossCutting.Bus.Sagas.Datas.StudentCreatedThirdPartyRegistrationSagaData", b =>
+            modelBuilder.Entity("StudentProject.Contracts.StudentCreatedThirdPartyRegistrationSagaData", b =>
                 {
                     b.Property<Guid>("CorrelationId")
                         .ValueGeneratedOnAdd()
@@ -39,21 +39,21 @@ namespace StudentProject.Infra.CrossCutting.Bus.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("request_create_student_third_party_uid_sended_at");
 
+                    b.Property<Guid?>("RequestUId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("request_uid");
+
+                    b.Property<DateTime?>("ResponseCreateStudentThirdPartyUIdNotReceivedLastAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("response_create_student_third_party_uid_not_received_last_at");
+
                     b.Property<DateTime?>("ResponseCreateStudentThirdPartyUIdReceivedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("response_create_student_third_party_uid_received_at");
 
-                    b.Property<DateTime?>("ResponseCreateStudentThirdPartyUIdWaitedLastAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("response_create_student_third_party_uid_waited_last_at");
-
                     b.Property<DateTime?>("StudentThirdPartyUIdUpdatedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("student_third_party_uid_updated_at");
-
-                    b.Property<Guid>("StudentUId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("student_uid");
 
                     b.HasKey("CorrelationId")
                         .HasName("PKstudentcreatedthirdpartyregistrationsagadata");

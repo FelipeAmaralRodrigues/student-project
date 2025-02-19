@@ -5,19 +5,19 @@ volumes:
 
 services:
   rabbitmq:
-    image: rabbitmq:3-management
+    image: masstransit/rabbitmq
     container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: user
-      RABBITMQ_DEFAULT_PASS: SqlServer@123
+      RABBITMQ_DEFAULT_PASS: RabbitMq!123
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "SqlServer@123"
+      SA_PASSWORD: "SqlServer!123"
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Developer"
     ports:

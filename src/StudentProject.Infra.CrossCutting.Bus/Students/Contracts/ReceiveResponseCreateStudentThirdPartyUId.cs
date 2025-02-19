@@ -6,8 +6,7 @@ namespace StudentProject.Contracts
         public Guid RequestUId { get; set; }
         public Guid StudentUId { get; set; }
     }
-
-    public record ResponseCreateStudentThirdPartyUIdWaited
+    public record ResponseCreateStudentThirdPartyUIdNotReceived
     {
         public Guid RequestUId { get; set; }
         public Guid StudentUId { get; set; }

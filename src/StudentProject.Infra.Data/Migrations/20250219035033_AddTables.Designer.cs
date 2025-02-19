@@ -12,8 +12,8 @@ using StudentProject.Infra.Data.Context;
 namespace StudentProject.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250213024355_AddTable")]
-    partial class AddTable
+    [Migration("20250219035033_AddTables")]
+    partial class AddTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,9 +54,9 @@ namespace StudentProject.Infra.Data.Migrations
                         .HasColumnType("varchar(128)")
                         .HasColumnName("last_name");
 
-                    b.Property<Guid?>("ThirdPartyStudentUId")
+                    b.Property<Guid?>("ThirdPartyUId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("third_party_student_uid");
+                        .HasColumnName("third_party_uid");
 
                     b.Property<Guid>("UId")
                         .ValueGeneratedOnAdd()
@@ -68,6 +68,12 @@ namespace StudentProject.Infra.Data.Migrations
                         .HasName("PKtbstudent");
 
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("UId")
+                        .IsUnique();
 
                     b.ToTable("tb_student", "dbo");
                 });

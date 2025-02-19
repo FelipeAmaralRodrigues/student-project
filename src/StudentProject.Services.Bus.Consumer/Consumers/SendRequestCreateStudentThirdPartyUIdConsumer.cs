@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using StudentProject.Contracts;
 
-namespace StudentProject.Services.Bus.Consumer.Consumers
+namespace StudentProject.Contracts
 {
     public class SendRequestCreateStudentThirdPartyUIdConsumer : IConsumer<SendRequestCreateStudentThirdPartyUId>
     {

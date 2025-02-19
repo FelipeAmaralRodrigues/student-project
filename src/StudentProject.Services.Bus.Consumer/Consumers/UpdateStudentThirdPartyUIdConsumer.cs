@@ -5,7 +5,7 @@ using StudentProject.Domain.Mediator;
 using StudentProject.Domain.Mediator.Notifications;
 using StudentProject.Domain.Students.Commands;
 
-namespace StudentProject.Services.Bus.Consumer.Consumers
+namespace StudentProject.Contracts
 {
     public class UpdateStudentThirdPartyUIdConsumer : IConsumer<UpdateStudentThirdPartyUId>
     {
