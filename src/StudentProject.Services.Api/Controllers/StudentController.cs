@@ -55,6 +55,7 @@ namespace StudentProject.Services.Api.Controllers
 
             try
             {
+                Guid correlationId = NewId.NextGuid();
                 await _mediator.SendCommand(command, cancellationToken);
 
                 if (!_notifications.HasNotifications())
@@ -65,7 +66,9 @@ namespace StudentProject.Services.Api.Controllers
                         FirstName = command.FirstName,
                         LastName = command.LastName,
                         BirthDate = command.BirthDate,
-                        Email = command.Email
+                        Email = command.Email,
+
+                        CorrelationId = correlationId
                     });
                 }
                 else
@@ -76,7 +79,9 @@ namespace StudentProject.Services.Api.Controllers
                         LastName = command.LastName,
                         BirthDate = command.BirthDate,
                         Email = command.Email,
-                        ValidationErrors = _notifications.GetNotifications().ToDictionary(a => a.Key, b => b.Value)
+                        ValidationErrors = _notifications.GetNotifications().ToDictionary(a => a.Key, b => b.Value),
+
+                        CorrelationId = correlationId
                     });
                 }
             }

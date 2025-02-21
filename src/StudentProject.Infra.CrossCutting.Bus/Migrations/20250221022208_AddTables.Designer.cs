@@ -12,7 +12,7 @@ using StudentProject.Infra.CrossCutting.Bus.Sagas.Context;
 namespace StudentProject.Infra.CrossCutting.Bus.Migrations
 {
     [DbContext(typeof(MassTransitDbContext))]
-    [Migration("20250219035120_AddTables")]
+    [Migration("20250221022208_AddTables")]
     partial class AddTables
     {
         /// <inheritdoc />
@@ -57,6 +57,10 @@ namespace StudentProject.Infra.CrossCutting.Bus.Migrations
                     b.Property<DateTime?>("StudentThirdPartyUIdUpdatedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("student_third_party_uid_updated_at");
+
+                    b.Property<Guid?>("StudentUId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("student_uid");
 
                     b.HasKey("CorrelationId")
                         .HasName("PKstudentcreatedthirdpartyregistrationsagadata");

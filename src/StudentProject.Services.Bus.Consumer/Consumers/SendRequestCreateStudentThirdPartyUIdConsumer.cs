@@ -24,7 +24,9 @@ namespace StudentProject.Contracts
                     FirstName = context.Message.FirstName,
                     LastName = context.Message.LastName,
                     BirthDate = context.Message.BirthDate,
-                    Email = context.Message.Email
+                    Email = context.Message.Email,
+
+                    CorrelationId = context.Message.CorrelationId
                 });
             }
             catch (Exception e)
@@ -39,7 +41,9 @@ namespace StudentProject.Contracts
 
                     ExceptionMessage = e.Message,
                     ExceptionStackTrace = e.StackTrace,
-                    ExceptionType = e.GetType().Name
+                    ExceptionType = e.GetType().Name,
+
+                    CorrelationId = context.Message.CorrelationId
                 });
             }
         }

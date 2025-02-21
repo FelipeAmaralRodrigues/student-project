@@ -39,7 +39,9 @@ namespace StudentProject.Contracts
                         LastName = context.Message.LastName,
                         BirthDate = context.Message.BirthDate,
                         Email = context.Message.Email,
-                        ValidationErrors = _notifications.GetNotifications().ToDictionary(m => m.Key, m => m.Value)
+                        ValidationErrors = _notifications.GetNotifications().ToDictionary(m => m.Key, m => m.Value),
+
+                        CorrelationId = context.Message.CorrelationId
                     });
                 }
                 else
@@ -51,6 +53,8 @@ namespace StudentProject.Contracts
                         LastName = context.Message.LastName,
                         BirthDate = context.Message.BirthDate,
                         Email = context.Message.Email,
+
+                        CorrelationId = context.Message.CorrelationId
                     });
                 }
             }
@@ -65,7 +69,9 @@ namespace StudentProject.Contracts
 
                     ExceptionMessage = e.Message,
                     ExceptionStackTrace = e.StackTrace,
-                    ExceptionType = e.GetType().ToString()
+                    ExceptionType = e.GetType().ToString(),
+
+                    CorrelationId = context.Message.CorrelationId
                 });
             }
         }

@@ -23,6 +23,11 @@ namespace StudentProject.Infra.CrossCutting.Bus.Sagas.Mapping
                 .HasColumnType("varchar(64)")
                 .IsRequired(true);
 
+            builder.Property(pl => pl.StudentUId)
+                .HasColumnName("student_uid")
+                .HasColumnType("uniqueidentifier")
+                .IsRequired(false);
+
             builder.Property(pl => pl.RequestUId)
                 .HasColumnName("request_uid")
                 .HasColumnType("uniqueidentifier")

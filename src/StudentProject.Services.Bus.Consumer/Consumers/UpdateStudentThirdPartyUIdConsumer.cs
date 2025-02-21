@@ -36,7 +36,9 @@ namespace StudentProject.Contracts
                     {
                         StudentUId = context.Message.StudentUId,
                         ThirdPartyUId = context.Message.ThirdPartyUId,
-                        ValidationErrors = _notifications.GetNotifications().ToDictionary(m => m.Key, m => m.Value)
+                        ValidationErrors = _notifications.GetNotifications().ToDictionary(m => m.Key, m => m.Value),
+
+                        CorrelationId = context.Message.CorrelationId
                     });
                 }
                 else 
@@ -45,7 +47,9 @@ namespace StudentProject.Contracts
                     {
                         RequestUId = context.Message.StudentUId,
                         StudentUId = context.Message.StudentUId,
-                        ThirdPartyUId = context.Message.ThirdPartyUId
+                        ThirdPartyUId = context.Message.ThirdPartyUId,
+
+                        CorrelationId = context.Message.CorrelationId
                     });
                 }
             }
@@ -58,7 +62,9 @@ namespace StudentProject.Contracts
 
                     ExceptionMessage = e.Message,
                     ExceptionStackTrace = e.StackTrace,
-                    ExceptionType = e.GetType().ToString()
+                    ExceptionType = e.GetType().ToString(),
+
+                    CorrelationId = context.Message.CorrelationId
                 });
             }
         }

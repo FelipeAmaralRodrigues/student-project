@@ -12,7 +12,7 @@ using StudentProject.Infra.Data.Context;
 namespace StudentProject.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250219035033_AddTables")]
+    [Migration("20250221022238_AddTables")]
     partial class AddTables
     {
         /// <inheritdoc />

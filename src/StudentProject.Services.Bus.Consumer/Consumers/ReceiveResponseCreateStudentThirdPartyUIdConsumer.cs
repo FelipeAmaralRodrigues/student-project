@@ -21,7 +21,9 @@ namespace StudentProject.Contracts
                     await context.Publish(new ResponseCreateStudentThirdPartyUIdNotReceived
                     {
                         RequestUId = context.Message.RequestUId,
-                        StudentUId = context.Message.StudentUId
+                        StudentUId = context.Message.StudentUId,
+
+                        CorrelationId = context.Message.CorrelationId
                     });
                 }
                 else
@@ -32,7 +34,9 @@ namespace StudentProject.Contracts
                     {
                         RequestUId = context.Message.RequestUId,
                         StudentUId = context.Message.StudentUId,
-                        ThirdPartyUId = thirdPartyPlatformUId
+                        ThirdPartyUId = thirdPartyPlatformUId,
+
+                        CorrelationId = context.Message.CorrelationId
                     });
                 }
             }
@@ -45,7 +49,9 @@ namespace StudentProject.Contracts
 
                     ExceptionMessage = e.Message,
                     ExceptionStackTrace = e.StackTrace,
-                    ExceptionType = e.GetType().ToString()
+                    ExceptionType = e.GetType().ToString(),
+
+                    CorrelationId = context.Message.CorrelationId
                 });
             }
         }

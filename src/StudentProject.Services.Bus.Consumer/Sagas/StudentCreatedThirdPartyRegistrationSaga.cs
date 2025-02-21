@@ -19,14 +19,18 @@ namespace StudentProject.Contracts
         {
             InstanceState(x => x.CurrentState);
 
-            Event(() => StudentCreated, e => e.CorrelateById(m => m.Message.UId));
-            Event(() => RequestCreateStudentThirdPartyUIdSended, e => e.CorrelateById(m => m.Message.UId));
-            Event(() => ResponseCreateStudentThirdPartyUIdNotReceived, e => e.CorrelateById(m => m.Message.StudentUId));
-            Event(() => ResponseCreateStudentThirdPartyUIdReceived, e => e.CorrelateById(m => m.Message.StudentUId));
-            Event(() => StudentThirdPartyUIdUpdated, e => e.CorrelateById(m => m.Message.StudentUId));
+            Event(() => StudentCreated, e => e.CorrelateById(m => m.Message.CorrelationId));
+            Event(() => RequestCreateStudentThirdPartyUIdSended, e => e.CorrelateById(m => m.Message.CorrelationId));
+            Event(() => ResponseCreateStudentThirdPartyUIdNotReceived, e => e.CorrelateById(m => m.Message.CorrelationId));
+            Event(() => ResponseCreateStudentThirdPartyUIdReceived, e => e.CorrelateById(m => m.Message.CorrelationId));
+            Event(() => StudentThirdPartyUIdUpdated, e => e.CorrelateById(m => m.Message.CorrelationId));
 
             Initially(
                 When(StudentCreated)
+                    .Then(a =>
+                    {
+                        a.Saga.StudentUId = a.Message.UId;
+                    })
                     .TransitionTo(RequestingCreateStudentThirdPartyUId)
                     .Publish(context => new SendRequestCreateStudentThirdPartyUId
                     {
@@ -34,7 +38,9 @@ namespace StudentProject.Contracts
                         FirstName = context.Message.FirstName,
                         LastName = context.Message.LastName,
                         BirthDate = context.Message.BirthDate,
-                        Email = context.Message.Email
+                        Email = context.Message.Email,
+
+                        CorrelationId = context.Message.CorrelationId
                     }));
 
             During(RequestingCreateStudentThirdPartyUId,
@@ -48,7 +54,9 @@ namespace StudentProject.Contracts
                     .Publish(context => new ReceiveResponseCreateStudentThirdPartyUId
                     {
                        RequestUId = context.Message.RequestUId,
-                       StudentUId = context.Message.UId
+                       StudentUId = context.Message.UId,
+
+                       CorrelationId = context.Message.CorrelationId
                     }));
 
             During(ReceivingResponseCreateStudentThirdPartyUId,
@@ -61,7 +69,9 @@ namespace StudentProject.Contracts
                     .Publish(context => new ReceiveResponseCreateStudentThirdPartyUId
                     {
                         RequestUId = context.Message.RequestUId,
-                        StudentUId = context.Message.StudentUId
+                        StudentUId = context.Message.StudentUId,
+
+                        CorrelationId = context.Message.CorrelationId
                     }),
                 When(ResponseCreateStudentThirdPartyUIdReceived)
                     .Then(context =>
@@ -73,14 +83,15 @@ namespace StudentProject.Contracts
                     {
                         RequestUId = context.Message.RequestUId,
                         StudentUId = context.Message.StudentUId,
-                        ThirdPartyUId = context.Message.ThirdPartyUId
+                        ThirdPartyUId = context.Message.ThirdPartyUId,
+
+                        CorrelationId = context.Message.CorrelationId
                     }));
 
             During(UpdatingStudentThirdPartyUId,
                 When(StudentThirdPartyUIdUpdated)
                     .Then(context => context.Saga.StudentThirdPartyUIdUpdatedAt = DateTime.UtcNow)
                     .Finalize());
-
         }
     }
 }

@@ -55,6 +55,10 @@ namespace StudentProject.Infra.CrossCutting.Bus.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("student_third_party_uid_updated_at");
 
+                    b.Property<Guid?>("StudentUId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("student_uid");
+
                     b.HasKey("CorrelationId")
                         .HasName("PKstudentcreatedthirdpartyregistrationsagadata");
 
