@@ -53,9 +53,9 @@ namespace StudentProject.Services.Api.Controllers
             if (command == null)
                 await _notifications.Handle(new DomainNotification("request", "The request body cannot be null"), cancellationToken);
 
+            Guid correlationId = NewId.NextGuid();
             try
             {
-                Guid correlationId = NewId.NextGuid();
                 await _mediator.SendCommand(command, cancellationToken);
 
                 if (!_notifications.HasNotifications())
@@ -97,6 +97,7 @@ namespace StudentProject.Services.Api.Controllers
                     ExceptionMessage = e.Message.ToString(),
                     ExceptionStackTrace = e.StackTrace, 
                     ExceptionType = e.GetType().ToString(),
+                    CorrelationId = correlationId
                 });
             }
             return ResponseApi(command);
