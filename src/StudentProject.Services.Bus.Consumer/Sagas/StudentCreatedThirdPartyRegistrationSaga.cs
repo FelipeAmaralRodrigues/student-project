@@ -66,12 +66,15 @@ namespace StudentProject.Contracts
                         context.Saga.ResponseCreateStudentThirdPartyUIdNotReceivedLastAt = DateTime.UtcNow;                        
                     })
                     .TransitionTo(ReceivingResponseCreateStudentThirdPartyUId)
-                    .Publish(context => new ReceiveResponseCreateStudentThirdPartyUId
+                    .ThenAsync(async context =>
                     {
-                        RequestUId = context.Message.RequestUId,
-                        StudentUId = context.Message.StudentUId,
-
-                        CorrelationId = context.Message.CorrelationId
+                        await Task.Delay(TimeSpan.FromSeconds(20));
+                        await context.Publish(new ReceiveResponseCreateStudentThirdPartyUId
+                        {
+                            RequestUId = (Guid) context.Saga.RequestUId,
+                            StudentUId = (Guid) context.Saga.StudentUId,
+                            CorrelationId = context.Saga.CorrelationId
+                        });
                     }),
                 When(ResponseCreateStudentThirdPartyUIdReceived)
                     .Then(context =>
