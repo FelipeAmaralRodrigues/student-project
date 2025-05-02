@@ -34,6 +34,7 @@ namespace StudentProject.Services.Api.Configurations
             // bus
             services.AddMassTransit(x =>
             {
+                x.DisableUsageTelemetry();
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, cfg) =>
                 {

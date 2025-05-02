@@ -13,6 +13,7 @@ namespace StudentProject.Services.Bus.Consumer.Configurations
             // bus
             services.AddMassTransit(x =>
             {
+                x.DisableUsageTelemetry();
                 x.SetKebabCaseEndpointNameFormatter();
 
                 x.AddConsumersFromNamespaceContaining(typeof(BusNamespace));
