@@ -5,10 +5,6 @@ using MassTransit;
 using StudentProject.Domain.Mediator.Notifications;
 using StudentProject.Domain.Mediator;
 using StudentProject.Services.Api.Filters;
-using StudentProject.Infra.Data.Data;
-using StudentProject.Domain.Data;
-using StudentProject.Infra.Data.Repositories;
-using StudentProject.Domain.Students.Repositories;
 
 namespace StudentProject.Services.Api.Configurations
 {

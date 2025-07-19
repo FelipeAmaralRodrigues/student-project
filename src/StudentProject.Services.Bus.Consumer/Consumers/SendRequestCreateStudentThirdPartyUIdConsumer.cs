@@ -14,7 +14,7 @@ namespace StudentProject.Contracts
         {
             try
             {
-                Guid requestUId = Guid.NewGuid();
+                Guid requestUId = NewId.NextGuid();
 
                 // simula um request para uma plataforma de terceiro gerando um id de request
                 await context.Publish(new RequestCreateStudentThirdPartyUIdSended

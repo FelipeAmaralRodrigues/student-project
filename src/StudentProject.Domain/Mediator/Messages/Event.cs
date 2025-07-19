@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using MassTransit;
+using MediatR;
 
 namespace StudentProject.Domain.Mediator.Messages
 {
@@ -13,14 +14,14 @@ namespace StudentProject.Domain.Mediator.Messages
         protected Event(object data) : this()
         {
             Data = data;
-            UId = Guid.NewGuid();
-            SetTimestamp(DateTime.Now);
+            UId = NewId.NextGuid();
+            SetTimestamp(DateTime.UtcNow);
         }
 
         protected Event()
         {
-            UId = Guid.NewGuid();
-            SetTimestamp(DateTime.Now);
+            UId = NewId.NextGuid();
+            SetTimestamp(DateTime.UtcNow);
         }
     }
 }

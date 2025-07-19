@@ -1,4 +1,6 @@
-﻿namespace StudentProject.Domain.Entities
+﻿using MassTransit;
+
+namespace StudentProject.Domain.Entities
 {
     public class Student
     {
@@ -17,7 +19,7 @@
         {
             return new Student
             {
-                UId = Guid.NewGuid(),
+                UId = NewId.NextGuid(),
                 FirstName = firstName.Trim(),
                 LastName = lastName.Trim(),
                 BirthDate = birthDate,

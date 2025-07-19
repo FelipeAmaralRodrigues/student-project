@@ -13,6 +13,13 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS: RabbitMq!123
+    networks:
+      - local_network
+    healthcheck:
+        test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -22,11 +29,90 @@ services:
       MSSQL_PID: "Developer"
     ports:
       - "1433:1433"
+    networks:
+      - local_network
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-C", "-S", "sqlserver", "-U", "sa", "-P", "SqlServer!123", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
   mssqltools:
     image: mcr.microsoft.com/mssql-tools
     depends_on:
-      - sqlserver
+      sqlserver:
+        condition: service_healthy
     volumes:
-      - ./sqlserver/init.sql:/tmp/init.sql
       - ./sqlserver/init-dbstudents.sh:/tmp/init-dbstudents.sh
+      - ./sqlserver/init.sql:/tmp/init.sql
     command: /bin/bash ./tmp/init-dbstudents.sh
+    networks:
+      - local_network
+
+  worker-1:
+    build:
+      context: ../src
+      dockerfile: ../src/StudentProject.Services.Bus.Consumer/Dockerfile
+    container_name: worker-1
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=tcp:sqlserver,1433;Initial Catalog=dbstudent;Persist Security Info=False;User ID=sa;Password=SqlServer!123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;"
+      ConnectionStrings__BusConnection: "rabbitmq://user:RabbitMq!123@rabbitmq:5672/"
+      RabbitMq__Uri: "rabbitmq"
+      RabbitMq__Usr: "user"
+      RabbitMq__Pwd: "RabbitMq!123"
+    ports:
+      - "5000:80"
+    networks:
+      - local_network
+  
+  worker-2:
+    build:
+      context: ../src
+      dockerfile: ../src/StudentProject.Services.Bus.Consumer/Dockerfile
+    container_name: worker-2
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=tcp:sqlserver,1433;Initial Catalog=dbstudent;Persist Security Info=False;User ID=sa;Password=SqlServer!123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;"
+      ConnectionStrings__BusConnection: "rabbitmq://user:RabbitMq!123@rabbitmq:5672/"
+      RabbitMq__Uri: "rabbitmq"
+      RabbitMq__Usr: "user"
+      RabbitMq__Pwd: "RabbitMq!123"
+    ports:
+      - "5001:80"
+    networks:
+      - local_network
+  
+  worker-3:
+    build:
+      context: ../src
+      dockerfile: ../src/StudentProject.Services.Bus.Consumer/Dockerfile
+    container_name: worker-3
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=tcp:sqlserver,1433;Initial Catalog=dbstudent;Persist Security Info=False;User ID=sa;Password=SqlServer!123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;"
+      ConnectionStrings__BusConnection: "rabbitmq://user:RabbitMq!123@rabbitmq:5672/"
+      RabbitMq__Uri: "rabbitmq"
+      RabbitMq__Usr: "user"
+      RabbitMq__Pwd: "RabbitMq!123"
+    ports:
+      - "5002:80"
+    networks:
+      - local_network
+
+networks:
+  local_network:
+    driver: bridge

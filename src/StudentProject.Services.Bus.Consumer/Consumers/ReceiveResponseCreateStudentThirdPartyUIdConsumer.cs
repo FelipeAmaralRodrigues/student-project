@@ -28,7 +28,7 @@ namespace StudentProject.Contracts
                 }
                 else
                 {
-                    Guid thirdPartyPlatformUId = Guid.NewGuid();
+                    Guid thirdPartyPlatformUId = NewId.NextGuid();
 
                     await context.Publish(new ResponseCreateStudentThirdPartyUIdReceived
                     {

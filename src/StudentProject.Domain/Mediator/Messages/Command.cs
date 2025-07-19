@@ -7,7 +7,7 @@ namespace StudentProject.Domain.Mediator.Messages
     {
         protected Command()
         {
-            SetTimestamp(DateTime.Now);
+            SetTimestamp(DateTime.UtcNow);
         }
     }
 
@@ -15,7 +15,7 @@ namespace StudentProject.Domain.Mediator.Messages
     {
         protected Command()
         {
-            SetTimestamp(DateTime.Now);
+            SetTimestamp(DateTime.UtcNow);
         }
     }
 }

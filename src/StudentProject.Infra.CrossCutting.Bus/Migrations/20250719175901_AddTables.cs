@@ -21,10 +21,13 @@ namespace StudentProject.Infra.CrossCutting.Bus.Migrations
                 {
                     correlation_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     current_state = table.Column<string>(type: "varchar(64)", nullable: false),
+                    saga_init_at = table.Column<DateTime>(type: "datetime2", nullable: true),
                     student_uid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     request_uid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     request_create_student_third_party_uid_sended_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    response_create_student_third_party_uid_not_received_retry_count = table.Column<int>(type: "int", nullable: true),
                     response_create_student_third_party_uid_not_received_last_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    response_create_student_third_party_uid_not_received_schedule_token_id = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     response_create_student_third_party_uid_received_at = table.Column<DateTime>(type: "datetime2", nullable: true),
                     student_third_party_uid_updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },

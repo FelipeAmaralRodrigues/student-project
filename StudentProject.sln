@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentProject.Domain", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentProject.Services.Bus.Consumer", "src\StudentProject.Services.Bus.Consumer\StudentProject.Services.Bus.Consumer.csproj", "{EDAEE2A5-3FD7-47E7-B756-371825B0A003}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentProject.Infra.CrossCutting.Bus", "src\StudentProject.Infra.CrossCutting.Bus\StudentProject.Infra.CrossCutting.Bus.csproj", "{50A3F55E-4108-481A-AAF2-CD0C4A364AC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentProject.Infra.CrossCutting.Bus", "src\StudentProject.Infra.CrossCutting.Bus\StudentProject.Infra.CrossCutting.Bus.csproj", "{50A3F55E-4108-481A-AAF2-CD0C4A364AC9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Domain", "02-Domain", "{C455C7F2-AA0C-4BEA-8B55-1C9DF07FBE81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Tests", "04-Tests", "{843667CD-1E4B-46C2-8FD4-93F90B4A75E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

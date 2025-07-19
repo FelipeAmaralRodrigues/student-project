@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using MassTransit;
+using Newtonsoft.Json;
 using StudentProject.Domain.Mediator.Messages;
+using Event = StudentProject.Domain.Mediator.Messages.Event;
 
 namespace StudentProject.Domain.Mediator.Notifications
 {
@@ -16,7 +18,7 @@ namespace StudentProject.Domain.Mediator.Notifications
 
         public DomainNotification(string key, string value)
         {
-            DomainNotificationId = Guid.NewGuid();
+            DomainNotificationId = NewId.NextGuid();
             Key = key;
             Value = value;
             Version = 1;

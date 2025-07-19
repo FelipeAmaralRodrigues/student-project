@@ -32,7 +32,7 @@ namespace StudentProject.Infra.Data.Repositories
 
         public async Task UpdateThirdPartyUIdByIdAsync(long studentId, Guid thirdPartyUId, CancellationToken cancellationToken)
         {
-            await DbSet.ExecuteUpdateAsync(a => a.SetProperty(a => a.ThirdPartyUId, thirdPartyUId), cancellationToken);
+            await DbSet.Where(a => a.Id == studentId).ExecuteUpdateAsync(a => a.SetProperty(a => a.ThirdPartyUId, thirdPartyUId), cancellationToken);
 
         }
     }

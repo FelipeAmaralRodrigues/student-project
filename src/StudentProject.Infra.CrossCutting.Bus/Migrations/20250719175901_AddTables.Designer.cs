@@ -12,7 +12,7 @@ using StudentProject.Infra.CrossCutting.Bus.Sagas.Context;
 namespace StudentProject.Infra.CrossCutting.Bus.Migrations
 {
     [DbContext(typeof(MassTransitDbContext))]
-    [Migration("20250221022208_AddTables")]
+    [Migration("20250719175901_AddTables")]
     partial class AddTables
     {
         /// <inheritdoc />
@@ -31,36 +31,59 @@ namespace StudentProject.Infra.CrossCutting.Bus.Migrations
                     b.Property<Guid>("CorrelationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("correlation_id");
+                        .HasColumnName("correlation_id")
+                        .HasColumnOrder(0);
 
                     b.Property<string>("CurrentState")
                         .IsRequired()
                         .HasColumnType("varchar(64)")
-                        .HasColumnName("current_state");
+                        .HasColumnName("current_state")
+                        .HasColumnOrder(1);
 
                     b.Property<DateTime?>("RequestCreateStudentThirdPartyUIdSendedAt")
                         .HasColumnType("datetime2")
-                        .HasColumnName("request_create_student_third_party_uid_sended_at");
+                        .HasColumnName("request_create_student_third_party_uid_sended_at")
+                        .HasColumnOrder(5);
 
                     b.Property<Guid?>("RequestUId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("request_uid");
+                        .HasColumnName("request_uid")
+                        .HasColumnOrder(4);
 
                     b.Property<DateTime?>("ResponseCreateStudentThirdPartyUIdNotReceivedLastAt")
                         .HasColumnType("datetime2")
-                        .HasColumnName("response_create_student_third_party_uid_not_received_last_at");
+                        .HasColumnName("response_create_student_third_party_uid_not_received_last_at")
+                        .HasColumnOrder(7);
+
+                    b.Property<int?>("ResponseCreateStudentThirdPartyUIdNotReceivedRetryCount")
+                        .HasColumnType("int")
+                        .HasColumnName("response_create_student_third_party_uid_not_received_retry_count")
+                        .HasColumnOrder(6);
+
+                    b.Property<Guid?>("ResponseCreateStudentThirdPartyUIdNotReceivedScheduleTokenId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("response_create_student_third_party_uid_not_received_schedule_token_id")
+                        .HasColumnOrder(8);
 
                     b.Property<DateTime?>("ResponseCreateStudentThirdPartyUIdReceivedAt")
                         .HasColumnType("datetime2")
-                        .HasColumnName("response_create_student_third_party_uid_received_at");
+                        .HasColumnName("response_create_student_third_party_uid_received_at")
+                        .HasColumnOrder(9);
+
+                    b.Property<DateTime?>("SagaInitAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("saga_init_at")
+                        .HasColumnOrder(2);
 
                     b.Property<DateTime?>("StudentThirdPartyUIdUpdatedAt")
                         .HasColumnType("datetime2")
-                        .HasColumnName("student_third_party_uid_updated_at");
+                        .HasColumnName("student_third_party_uid_updated_at")
+                        .HasColumnOrder(10);
 
                     b.Property<Guid?>("StudentUId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("student_uid");
+                        .HasColumnName("student_uid")
+                        .HasColumnOrder(3);
 
                     b.HasKey("CorrelationId")
                         .HasName("PKstudentcreatedthirdpartyregistrationsagadata");
