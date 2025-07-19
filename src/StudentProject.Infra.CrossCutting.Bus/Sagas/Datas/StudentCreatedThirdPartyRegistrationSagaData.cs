@@ -11,9 +11,9 @@ namespace StudentProject.Contracts
         public Guid? RequestUId { get; set; }
         public DateTime? SagaInitAt { get; set; }
         public DateTime? RequestCreateStudentThirdPartyUIdSendedAt { get; set; }
-        public int? ResponseCreateStudentThirdPartyUIdNotReceivedRetryCount { get; set; }
         public DateTime? ResponseCreateStudentThirdPartyUIdNotReceivedLastAt { get; set; }
         public Guid? ResponseCreateStudentThirdPartyUIdNotReceivedScheduleTokenId { get; set; }
+        public int? ResponseCreateStudentThirdPartyUIdNotReceivedRetryCount { get; set; }
         public DateTime? ResponseCreateStudentThirdPartyUIdReceivedAt { get; set; }
         public DateTime? StudentThirdPartyUIdUpdatedAt { get; set; }
     }

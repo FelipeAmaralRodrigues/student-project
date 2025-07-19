@@ -12,7 +12,7 @@ using StudentProject.Infra.CrossCutting.Bus.Sagas.Context;
 namespace StudentProject.Infra.CrossCutting.Bus.Migrations
 {
     [DbContext(typeof(MassTransitDbContext))]
-    [Migration("20250719175901_AddTables")]
+    [Migration("20250719201412_AddTables")]
     partial class AddTables
     {
         /// <inheritdoc />
@@ -53,17 +53,17 @@ namespace StudentProject.Infra.CrossCutting.Bus.Migrations
                     b.Property<DateTime?>("ResponseCreateStudentThirdPartyUIdNotReceivedLastAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("response_create_student_third_party_uid_not_received_last_at")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(6);
 
                     b.Property<int?>("ResponseCreateStudentThirdPartyUIdNotReceivedRetryCount")
                         .HasColumnType("int")
                         .HasColumnName("response_create_student_third_party_uid_not_received_retry_count")
-                        .HasColumnOrder(6);
+                        .HasColumnOrder(8);
 
                     b.Property<Guid?>("ResponseCreateStudentThirdPartyUIdNotReceivedScheduleTokenId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("response_create_student_third_party_uid_not_received_schedule_token_id")
-                        .HasColumnOrder(8);
+                        .HasColumnName("response_create_student_third_party_uid_schedule_token_id")
+                        .HasColumnOrder(7);
 
                     b.Property<DateTime?>("ResponseCreateStudentThirdPartyUIdReceivedAt")
                         .HasColumnType("datetime2")

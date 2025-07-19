@@ -49,21 +49,21 @@ namespace StudentProject.Infra.CrossCutting.Bus.Sagas.Mapping
                 .IsRequired(false)
                 .HasColumnOrder(5);
 
-            builder.Property(pl => pl.ResponseCreateStudentThirdPartyUIdNotReceivedRetryCount)
-                .HasColumnName("response_create_student_third_party_uid_not_received_retry_count")
-                .HasColumnType("int")
-                .IsRequired(false)
-                .HasColumnOrder(6);
-
             builder.Property(pl => pl.ResponseCreateStudentThirdPartyUIdNotReceivedLastAt)
                 .HasColumnName("response_create_student_third_party_uid_not_received_last_at")
                 .HasColumnType("datetime2")
                 .IsRequired(false)
-                .HasColumnOrder(7);
+                .HasColumnOrder(6);
 
             builder.Property(pl => pl.ResponseCreateStudentThirdPartyUIdNotReceivedScheduleTokenId)
-                .HasColumnName("response_create_student_third_party_uid_not_received_schedule_token_id")
+                .HasColumnName("response_create_student_third_party_uid_schedule_token_id")
                 .HasColumnType("uniqueidentifier")
+                .IsRequired(false)
+                .HasColumnOrder(7);
+
+            builder.Property(pl => pl.ResponseCreateStudentThirdPartyUIdNotReceivedRetryCount)
+                .HasColumnName("response_create_student_third_party_uid_not_received_retry_count")
+                .HasColumnType("int")
                 .IsRequired(false)
                 .HasColumnOrder(8);
 
